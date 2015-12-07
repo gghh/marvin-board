@@ -1,0 +1,49 @@
+This is a stub for an alternative to the current web dashboard of Marvin. Marvin is a system that monitors the health of the Linux kernel in term of performance. For more information, see Mel Gorman's blog post [Continual testing of mainline kernels](http://www.csn.ul.ie/~mel/blog/index.php?/archives/23-Continual-testing-of-mainline-kernels.html)
+
+This stub is built retrieving data from [one of the instances of the current web dashboard](http://www.csn.ul.ie/~mel/results/suse/marvin/dashboard-SLE11SP3User-Mainline-smart.html) via HTML scraping.
+
+# Retrieve the data and build the page
+
+Enter the root directory of the project and run:
+
+```
+$ ./getdata
+```
+
+This will create the file `data/data.json`. To create the dashboard, run:
+
+```
+$ ./makepage
+```
+
+This will create `html/dashboard.html`. At this point you'll have to serve the `html` directory with an HTTP server (if you just open `dashboard.html` from the browser, you'll miss the .css file). One simple way to do that in a local environment is to use the python module `SimpleHTTPServer`:
+
+```
+$ cd html
+$ python -m SimpleHTTPServer 8080
+```
+
+at this point you can visit the URL `http://localhost:8080/dashboard.html` and you'll have it.
+
+The files `data.json` and `dashboard.html` are also committed in the repository in the directory `reference-artefacts` for convenience.
+
+# Dependencies
+
+The scraper and the page generator are written in python 2; you'll need the modules `BeautifulSoup` and `lxml`.
+
+# Acknoledgements
+
+The CSS file `html/default.css` is taken from the web dashboard of the job scheduler `buildbot`.
+
+# Todo
+
+Most of the functionalities from the original dashboard are missing; in particular:
+
+* all pages besides the main one aren't there
+* various hyperlinks
+* colors to signal the status of a benchmark
+* plots
+
+# License
+
+This work is licensed under GPL.

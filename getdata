@@ -1,0 +1,18 @@
+#!/usr/bin/env python2
+
+import json
+import os.path
+import os
+from slurp import *
+
+data = getdata()
+
+if os.path.exists('data/'):
+    if os.path.exists('data/data.json'):
+        os.remove('data/data.json')
+else:
+    os.makedirs('data/')
+
+f = open('data/data.json', 'w')
+json.dump(data, f)
+f.close()
